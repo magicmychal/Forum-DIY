@@ -31,6 +31,14 @@ class UserController extends Controller {
             echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }
+        if ($_POST['txtUsername'] === 'admin' ||
+            $_POST['txtUsername'] === 'moderator' ||
+            strpos($_POST['txtUsername'], 'admin') !== false ||
+            strpos($_POST['txtUsername'], 'moderator') !== false) {
+            echo '{"status":"0","message":"Reserved username"}';
+            exit;
+        }
+
         // check if it valid email
         if (!filter_var($_POST['txtEmail'], FILTER_VALIDATE_EMAIL)) {
             echo '{"status":"0","message":"Enter valid email"}';
@@ -64,11 +72,7 @@ class UserController extends Controller {
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $user_class = new Users;
-        // Mortimus have commented out this for testing the mailer on production
-      // $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
-        $returnedID = 2;
-         mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
-
+       $user_class->sign_up_user($username, $user_password, $email, $token);
     }
 
     public static function login_user()
@@ -120,11 +124,11 @@ class UserController extends Controller {
         $used_Id = $_GET['id'];
         $user_model = new Users;
         $response_activate_user = $user_model->activate_user($token, $used_Id);
-        if($response_activate_user === true){
+        if ($response_activate_user === true) {
             $tittle = "Success";
             $message = "User activated";
             require_once("./includes/views/verify_user.php");
-        }else{
+        } else {
             $tittle = "Failure";
             $message = "User was not activated";
             require_once("./includes/views/verify_user.php");

@@ -52,8 +52,7 @@ class mailer{
          // output: localhost
          $hostName = $_SERVER['HTTP_HOST'];
 
-         $url = "165.22.78.2/forum-diy/verify?token=$token&id=$UserID";
-        $test = "localhost/forum-diy";
+         $url = "165.22.78.2/verify?token=$token&id=$UserID";
          // Set email format to HTML
          $template= ' <!DOCTYPE html>
       <html lang="en">

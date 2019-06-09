@@ -1,0 +1,64 @@
+{"DATE":2019-06-01, "TIME": 10:59:04pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:05pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:06pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:20pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:21pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:22pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 10:59:23pm , "Error": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php:22
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Model.php(22): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/User_Controller.php(90): Model->__construct()
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(41): User_Controller::login_user()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(42): Route::set('login', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}

@@ -1,0 +1,28 @@
+{"DATE":2019-06-01, "TIME": 11:37:24pm , "Error": PDOException: SQLSTATE[22007]: Invalid datetime format: 1292 Truncated incorrect DOUBLE value: 't.user_id' in /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php:219
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php(219): PDOStatement->execute()
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/SingleTopic.php(174): Topics->update_topic(Array)
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(93): SingleTopic::edit_topic()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(98): Route::set('api-edit-topic', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 11:39:33pm , "Error": PDOException: SQLSTATE[22007]: Invalid datetime format: 1292 Truncated incorrect DOUBLE value: 'tuser_id' in /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php:219
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php(219): PDOStatement->execute()
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/SingleTopic.php(174): Topics->update_topic(Array)
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(93): SingleTopic::edit_topic()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(98): Route::set('api-edit-topic', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}{"DATE":2019-06-01, "TIME": 11:45:25pm , "Error": PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php:232
+Stack trace:
+#0 /home/michal/Documents/htdocs/forum-diy/includes/models/Topics.php(232): PDOStatement->execute()
+#1 /home/michal/Documents/htdocs/forum-diy/includes/controllers/SingleTopic.php(174): Topics->update_topic(Array)
+#2 /home/michal/Documents/htdocs/forum-diy/routes.php(93): SingleTopic::edit_topic()
+#3 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): {closure}()
+#4 /home/michal/Documents/htdocs/forum-diy/includes/classes/Route.php(16): Closure->__invoke()
+#5 /home/michal/Documents/htdocs/forum-diy/routes.php(98): Route::set('api-edit-topic', Object(Closure))
+#6 /home/michal/Documents/htdocs/forum-diy/index.php(19): require_once('/home/michal/Do...')
+#7 {main}, "line": 11}

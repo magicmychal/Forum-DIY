@@ -1,5 +1,5 @@
 <?php
-define('DBUSER','remote_user');
-define('DBPWD','bjY4&5Fc2Un!');
-define('DBHOST','165.22.78.2');
+define('DBUSER','root');
+define('DBPWD','root');
+define('DBHOST','localhost');
 define('DBNAME','lifehack');

@@ -59,8 +59,7 @@ class Users extends Model
                 exit;
             }
             echo '{"status":"1","message":"User was created"}';
-            // return $returnedID;
-            //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
+            mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
@@ -113,10 +112,9 @@ class Users extends Model
         }
 
 
-    }
+   }
 
-    public function select_user_role_by_id($userId)
-    {
+    public function select_user_role_by_id($userId){
         try {
             $sQuery = $this->db->prepare('SELECT user_role_id from users WHERE id=:userId');
             $sQuery->bindValue(':userId', $userId);
