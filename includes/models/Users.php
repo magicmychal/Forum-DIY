@@ -51,16 +51,16 @@ class Users extends Model
             $sQuery->bindValue(':date_created', date('Y/m/d H:i:s'));
             $sQuery->bindValue(':user_role', 4);
             $sQuery->bindValue(':active', 1);
-            $sQuery->bindValue(':token' , $token);
+            $sQuery->bindValue(':token', $token);
             $sQuery->execute();
-            $returnedID =  $this->db->lastInsertId();
+            $returnedID = $this->db->lastInsertId();
             if (!$sQuery->rowCount()) {
                 echo '{"status":"0","message":"User was not created"}';
                 exit;
             }
             echo '{"status":"1","message":"User was created"}';
             // return $returnedID;
-      //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
+            //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
@@ -103,19 +103,20 @@ class Users extends Model
             $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
             if(!$sQuery->rowCount()){
-                echo '{"status":"0","message":"User was not'.$token.' activated "';
+               return false;
                 exit;
             }
-            echo '{"status":"1", "message":"User activated" }';
+           return true;
         }catch(PDOException $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             LogSaver::save_the_log($e, 'verify.txt');
         }
 
 
-   }
+    }
 
-    public function select_user_role_by_id($userId){
+    public function select_user_role_by_id($userId)
+    {
         try {
             $sQuery = $this->db->prepare('SELECT user_role_id from users WHERE id=:userId');
             $sQuery->bindValue(':userId', $userId);
@@ -124,6 +125,72 @@ class Users extends Model
             return $user;
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'select-user-role.txt');
+            die();
+        }
+    }
+
+    public function get_users($searchBy)
+    {
+        try {
+            $sQuery = $this->db->prepare('SELECT u.id, u.username, u.email, u.date_createad, u.user_role_id, u.active
+                                                    FROM users u
+                                                    WHERE u.username REGEXP :searchTerm OR u.username REGEXP :searchTerm');
+            $sQuery->bindValue(':searchTerm', $searchBy);
+            $sQuery->execute();
+            $result = $sQuery->fetchAll();
+            return $result;
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'get-user.txt');
+            die();
+        }
+    }
+
+    public function update_user_basics($userId, $iActive, $iRole)
+    {
+        /*
+         * Michal: Admin can't grant another admin! At least for now.
+         * Therefore system won't allow to change role to 6
+         */
+        if ($iRole == 6) {
+            return false;
+            die();
+        }
+        /*
+         * So now we cannot gain the admin rights. But we also don't want to
+         * denied admin rights. Therefore the idea is to check the user rights beforehand again
+         */
+        try {
+            $sQuery = $this->db->prepare('SELECT user_role_id
+                                                    FROM users
+                                                    WHERE id = :iUserId');
+            $sQuery->bindValue(':iUserId', $userId);
+            $sQuery->execute();
+            $userRole = $sQuery->fetch();
+            if($userRole['user_role_id'] == 6){
+                return false;
+                die();
+            }
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'update-user-basics.txt');
+            return false;
+            die();
+        }
+        try {
+            $sQuery = $this->db->prepare('UPDATE users
+                                                    SET active = :iActive, user_role_id = :iRole
+                                                    WHERE id = :iUserId');
+            $sQuery->bindValue(':iActive', $iActive);
+            $sQuery->bindValue(':iRole', $iRole);
+            $sQuery->bindValue(':iUserId', $userId);
+            $sQuery->execute();
+            if (!$sQuery->rowCount()) {
+                return false;
+                exit;
+            }
+            return true;
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'update-user-basics.txt');
+            return false;
             die();
         }
     }

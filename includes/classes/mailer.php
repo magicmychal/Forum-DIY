@@ -9,7 +9,7 @@ class mailer{
      public  static  function sent_mail($sent_mail_to, $token , $UserID , $username){
          date_default_timezone_set('Etc/UTC');
          //require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-echo  require_once('PHPMailer.php');
+
 //Create a new PHPMailer instance
          $mail = new PHPMailer;
 //Tell PHPMailer to use SMTP
@@ -18,7 +18,7 @@ echo  require_once('PHPMailer.php');
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-         $mail->SMTPDebug = 2;
+         $mail->SMTPDebug = 0;
 //Ask for HTML-friendly debug output
          $mail->Debugoutput = 'html';
 //Set the hostname of the mail server
@@ -52,9 +52,43 @@ echo  require_once('PHPMailer.php');
          // output: localhost
          $hostName = $_SERVER['HTTP_HOST'];
 
-         $url = "$hostName/forum-diy/verify?token=".$token."&id=$UserID";
+         $url = "165.22.78.2/forum-diy/verify?token=$token&id=$UserID";
+        $test = "localhost/forum-diy";
          // Set email format to HTML
-         $mail->Body    = "Hi $username thank you registering at Forum-diy. You can activate your account $url </a> ";
+         $template= ' <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <title>Making Accessible Emails</title>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <style type="text/css">
+              /* CLIENT-SPECIFIC STYLES */
+              body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+              table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+              img { -ms-interpolation-mode: bicubic; }
+
+              /* RESET STYLES */
+              img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+              table { border-collapse: collapse !important; }
+              body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+          </style>
+        </head>
+        <body style="background-color:#00897B; margin: 0 !important; padding: 60px 0 60px 0 !important;">
+          <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
+            <tr>
+                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
+                <td bgcolor="white" width="600" style="border-radius: 4px; color: grey; font-family: sans-serif; font-size: 18px; line-height: 28px; padding: 40px 40px;">
+                  <h1 style="color: black; font-size: 32px; font-weight: bold; line-height: 36px; margin: 0 0 30px 0;">Hi '.$username.' thank you for registering at Forum.diy.</h1>
+                  <p style="margin: 0 0 30px 0;"> <em style="color: black;"> You can activate your account at <a role="button" href='.$url.' style="border-radius: 5px; text-decoration: none; background-color: #2c3e50; color:white; padding: .4em;">THIS</a> link </em> </p>
+                </td>
+                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
+            </tr>
+          </table>
+        </body>
+      </html>
+';
+         $mail->Body    = $template;
 
 
          // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
@@ -65,8 +99,6 @@ echo  require_once('PHPMailer.php');
 //send the message, check for errors
          if (!$mail->send()) {
              echo "Mailer Error: " . $mail->ErrorInfo;
-         } else {
-             echo "Message sent!";
          }
      }
 }

@@ -1,17 +1,16 @@
 <?php
 ini_set('display_errors', 1);
+class UserController extends Controller {
+   public static function create_user(){
+       // check the token integrity
+       if (!hash_equals($_SESSION['key'], $_POST['token'])){
+           echo '{"status":"0","message":"Invalid token"}';
+           exit;
+       }
 
-class User_Controller extends Controller
-{
-    public static function create_user()
-    {
-        // check the token integrity
-        if (!hash_equals($_SESSION['key'], $_POST['token'])) {
-            echo '{"status":"0","message":"Invalid token"}';
-            exit;
-        }
-        // check if passwords matches
-        if ($_POST['txtPassword'] != $_POST['txtConfirmPassword']) {
+
+        // check if passwords mathces
+        if($_POST['txtPassword'] != $_POST['txtConfirmPassword']){
             echo '{"status":"0","message":"Passwords don\'t match"}';
             exit;
         }
@@ -27,14 +26,9 @@ class User_Controller extends Controller
             echo '{"status":"0","message":"Username should be between 6 and 20 character"}';
             exit;
         }
-
-
         //Preventing the user to create admin or moderator 
-        if ($_POST['txtUsername'] === 'admin' ||
-            $_POST['txtUsername'] === 'moderator' ||
-            strpos($_POST['txtUsername'], 'admin') !== false ||
-            strpos($_POST['txtUsername'], 'moderator') !== false) {
-            echo '{"status":"0","message":"Reserved username"}';
+        if($_POST['txtUsername'] === 'admin' || $_POST['txtUsername'] === 'moderator' ){
+            echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }
         // check if it valid email
@@ -70,8 +64,10 @@ class User_Controller extends Controller
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $user_class = new Users;
-        $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
-        // mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
+        // Mortimus have commented out this for testing the mailer on production
+      // $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
+        $returnedID = 2;
+         mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
 
     }
 
@@ -119,11 +115,20 @@ class User_Controller extends Controller
 
     public static function verify_user()
     {
-        require_once("./includes/views/verify_user.php");
+
         $token = $_GET['token'];
         $used_Id = $_GET['id'];
         $user_model = new Users;
-        $user_model->activate_user($token, $used_Id);
+        $response_activate_user = $user_model->activate_user($token, $used_Id);
+        if($response_activate_user === true){
+            $tittle = "Success";
+            $message = "User activated";
+            require_once("./includes/views/verify_user.php");
+        }else{
+            $tittle = "Failure";
+            $message = "User was not activated";
+            require_once("./includes/views/verify_user.php");
+        }
 
     }
 

@@ -25,20 +25,20 @@ Route::set('category', function (){
 });
 
 Route::set('sign-up', function (){
-    User_Controller::CreateView('sign_up','');
+    UserController::CreateView('sign_up','');
    // Sign_up::test();
 });
 
 Route::set('verify', function (){
-    User_Controller::verify_user();
+    UserController::verify_user();
 });
 
 Route::set('create-user', function (){
-    User_Controller::create_user();
+    UserController::create_user();
 });
 
 Route::set('login', function(){
-    User_Controller::login_user();
+    UserController::login_user();
 });
 
 // In the get, we need to pass additional array with the keys
@@ -54,7 +54,7 @@ Route::set('error', function (){
 });
 
 Route::set('logout', function(){
-    User_Controller::logout();
+    UserController::logout();
 });
 
 Route::set('create-topic', function (){
@@ -115,4 +115,41 @@ Route::set('reply', function (){
     }
  });
 
+ // AdminController routes start here
 
+Route::set('admin-panel', function (){
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::CreateView('admin/admin-panel', '');
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
+});
+
+Route::set('admin-users', function (){
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::CreateView('admin/user-management', '');
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
+
+});
+
+Route::set('admin-users-api', function (){
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::get_user();
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
+});
+
+Route::set('admin-users-update-api', function (){
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::update_user_basics();
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
+});

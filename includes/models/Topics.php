@@ -201,7 +201,7 @@ class Topics extends Model
              * For now we need to have two different prepare statements for moderator
              * and for the privileged user
              */
-            if(UserPrivilegesChecker::is_moderator($_SESSION['User']['id'])){
+            if(UserPrivilegesChecker::is_moderator()){
                 $sQuery = $db->prepare('UPDATE lifehack.topics t
                                                 SET t.topic_name = :topic_name,
                                                     t.content    = :content,
@@ -225,7 +225,7 @@ class Topics extends Model
             $sQuery->bindValue(':topic_id', $topicData['topic_id']);
 
             // IF IT'S A USER
-            if(!UserPrivilegesChecker::is_moderator($_SESSION['User']['id'])){
+            if(!UserPrivilegesChecker::is_moderator()){
                 $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
                 $sQuery->bindValue(':content', $topicData['content']);
             } else {

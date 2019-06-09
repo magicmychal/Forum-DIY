@@ -17,10 +17,10 @@
 <div class="vertical-center">
     <div class="container justify-content align-items-center">
         <div class="col-12 m-3">
-            <h1>:) JAAAH</h1>
+            <h1><?php echo $tittle ; ?></h1>
             <hr>
-            <h1>User activated </h1>
-            <a href="index.php" class="btn btn-secondary" id="backHome">Back to Home</a>
+            <h1><?php echo $message ;?> </h1>
+            <a href="index.php" class="btn btn-secondary" id="backHome">Go to Home</a>
         </div>
 
     </div>

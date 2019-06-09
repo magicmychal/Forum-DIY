@@ -86,7 +86,7 @@
                         <div id="guestActions">
                             <ul>
                                 <li><a href="sign-up">Sign up</a></li>
-                                <li><a href="index.php">Log in</a></li>    
+                                <li><a href="index.php">Log in</a></li>
                             </ul>
                         </div>
                         <?php
@@ -150,6 +150,8 @@
         integrity="sha256-6sZs7OGP0Uzcl7UDsLaNsy1K0KTZx1+6yEVrRJMn2IM=" crossorigin="anonymous"></script>
 <script src="static/js/main.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"
+        integrity="sha256-t5ZQTZsbQi8NxszC10CseKjJ5QeMw5NINtOXQrESGSU=" crossorigin="anonymous"></script>
 <?php
 if (file_exists("static/js/$pageJs.js")) {
     echo '<script src="static/js/' . $pageJs . '.js"></script>';

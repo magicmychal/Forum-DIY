@@ -1,5 +1,6 @@
 <?php
 require_once './static/pageinfo.php';
+/** @var TYPE_NAME $csrf */
 $csrf = CSRFToken::generate_token();
 ?>
 
@@ -24,10 +25,11 @@ $csrf = CSRFToken::generate_token();
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-    <?php 
-        if(file_exists("static/css/$pageCss.css")){
-            echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
-        }
+    <?php
+    /** @var TYPE_NAME $pageCss */
+    if (file_exists("static/css/$pageCss.css")) {
+        echo '<link rel="stylesheet" href="static/css/' . $pageCss . '.css">';
+    }
     ?>
 
 </head>
@@ -35,12 +37,13 @@ $csrf = CSRFToken::generate_token();
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-color">
     <a class="navbar-brand" href="index.php"><img src="./static/assets/logo.png" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Showing the login form only if you are NOT logged in. -->
-        <?php 
+        <?php
 
 
         if(!isset($_SESSION['User'])){ 
@@ -63,37 +66,10 @@ $csrf = CSRFToken::generate_token();
     
 </nav>
 
-<!-- Deleted search bar 
-
-<div class="search-bar">
-    <div class="container">
-
-
-        <div class="row py-4 d-flex flex-row-reverse">
-
-            Old version of search bar
-            <div class="col-md-12 col-lg-12 text-center text-md-right mb-4 mb-md-0">
-                <form class=" form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        
-
-
-            <div class="search col-md-12 col-lg-12 text-center">
-                <form class="form-inline">
-                    <input class="search-bar form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
--->
-
-
-            <!-- Grid column -->
-        </div>
-        <!-- Grid row-->
-        <hr class="horizontal-line">
-    </div>
+<!-- Grid column -->
+</div>
+<!-- Grid row-->
+<hr class="horizontal-line">
+</div>
 
 </div>
