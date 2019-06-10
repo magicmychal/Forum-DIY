@@ -33,6 +33,14 @@ Route::set('verify', function (){
     UserController::verify_user();
 });
 
+Route::set('reactivate', function (){
+    UserController::reactivate_user();
+});
+
+Route::set('report', function (){
+    FailedLogin::report();
+});
+
 Route::set('create-user', function (){
     UserController::create_user();
 });

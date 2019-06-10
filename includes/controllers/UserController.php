@@ -97,22 +97,29 @@ class UserController extends Controller {
         $username = $_POST['txtUsername'];
         $user_model = new Users;
 
-
-        $selected_user = $user_model->select_username($username);
-
-        //we are checking if the size of the array is zero or and doesn't match the user is not verifed 
-        if (sizeof($selected_user) === 0 || $selected_user[0]['username'] != $username) {
+        // check if the username exists
+        if(!$user_model->select_username($username)){
             echo '{"status":"0","message":"Wrong username or password"}';
             exit;
         }
-
-        $verified_user = $user_model->select_username_and_password($username);
-        if (!password_verify($_POST['txtPassword'], $verified_user[0]['password_hashed'])) {
-            echo '{"status":"0","message":"Wrong user name or password"}';
+        
+        // check if the user is active
+        if(!$user_model->select_active_status($username)){
+            echo '{"status":"0","message":"This account is not activated"}';
             exit;
         }
 
-        $_SESSION['User'] = $verified_user[0];
+        //verify password
+        // TODO: refactor this code
+        $verified_user = $user_model->select_username_and_password($username);
+        if (!password_verify($_POST['txtPassword'], $verified_user['password_hashed'])) {
+            // save failed attempt
+            FailedLogin::save_attempt($username);  
+            exit;
+
+        }
+
+        $_SESSION['User'] = $verified_user;
         echo '{"status":"1","message":"User logged in"}';
         // print_r($_SESSION['User']);
     }
@@ -121,10 +128,10 @@ class UserController extends Controller {
     {
 
         $token = $_GET['token'];
-        $used_Id = $_GET['id'];
+        $user_id = $_GET['id'];
         $user_model = new Users;
-        $response_activate_user = $user_model->activate_user($token, $used_Id);
-        if ($response_activate_user === true) {
+        $response_activate_user = $user_model->activate_user($token, $user_id);
+        if ($response_activate_user) {
             $tittle = "Success";
             $message = "User activated";
             require_once("./includes/views/verify_user.php");
@@ -134,6 +141,19 @@ class UserController extends Controller {
             require_once("./includes/views/verify_user.php");
         }
 
+    }
+
+    public static function reactivate_user()
+    {
+        if(isset($_GET['token']) && isset($_GET['id'])){
+            $token = $_GET['token'];
+            $userId = $_GET['id'];
+            FailedLogin::reactivate_user($token,$userId);
+
+        }else{
+            Controller::CreateView('error', '');
+        }
+        
     }
 
     public static function logout()

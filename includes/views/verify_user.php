@@ -20,7 +20,7 @@
             <h1><?php echo $tittle ; ?></h1>
             <hr>
             <h1><?php echo $message ;?> </h1>
-            <a href="index.php" class="btn btn-secondary" id="backHome">Go to Home</a>
+            <a href="index.php" class="btn btn-secondary" id="backHome">Go to Homepage</a>
         </div>
 
     </div>

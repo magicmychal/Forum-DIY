@@ -5,7 +5,7 @@ class Route {
     // An array with all existing routes which will be checked on autoload
     public static $validRoutes = array('index.php', 'category', 'sign-up', 'verify', 'create-user', 'login', 'topic',
         'error', 'logout', 'create-topic', 'api-create-topic', 'edit-topic', 'api-edit-topic', 'reply', 'api-reply',
-        'admin-panel', 'admin-users', 'admin-users-api', 'admin-users-update-api');
+        'admin-panel', 'admin-users', 'admin-users-api', 'admin-users-update-api', 'reactivate', 'report');
 
     public static function set($route, $function) {
 

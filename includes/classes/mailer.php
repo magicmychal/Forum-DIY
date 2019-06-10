@@ -6,7 +6,7 @@ require_once('SMTP.php');
 //require_once ('Exception.php');
 class mailer{
 
-     public  static  function sent_mail($sent_mail_to, $token , $UserID , $username){
+     public  static  function sent_mail($sent_mail_to, $token , $UserID , $username , $location=0){
          date_default_timezone_set('Etc/UTC');
          //require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 
@@ -43,50 +43,31 @@ class mailer{
 //Set who the message is to be sent to
          $mail->addAddress($sent_mail_to, $username);
 //Set the subject line
-         $mail->Subject = 'Activate user account on Forum-diy';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-         $mail->isHTML(true);
+$mail->isHTML(true);
 
 
-         // output: localhost
-         $hostName = $_SERVER['HTTP_HOST'];
+// output: localhost
+$hostName = $_SERVER['HTTP_HOST'];
+if($location === 0){
+            $mail->Subject = 'Activate user account on Forum-diy';
+            $url = "165.22.78.2/verify?token=$token&id=$UserID";
+            // Set email format to HTML
+            $template= file_get_contents("includes/templates/mail-activate.html");
+            $template = str_replace('sUsername', $username, $template);
+            $template = str_replace('HOSTURL', $url, $template);
+        }else{
+            $mail->Subject = 'Login attempts on Forum-diy';
+            $url = "165.22.78.2/reactivate?token=$token&id=$UserID";
+            $reportURL = "165.22.78.2/report";
+            $template= file_get_contents("includes/templates/mail-reactivate.html");
+            $template = str_replace('sUsername', $username, $template);
+            $template = str_replace('LocationIP', $location, $template);
+            $template = str_replace('HOSTURL', $url, $template);
+            $template = str_replace('ReportURL', $reportURL, $template);
+        }
 
-         $url = "165.22.78.2/verify?token=$token&id=$UserID";
-         // Set email format to HTML
-         $template= ' <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <title>Making Accessible Emails</title>
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <style type="text/css">
-              /* CLIENT-SPECIFIC STYLES */
-              body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-              table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-              img { -ms-interpolation-mode: bicubic; }
-
-              /* RESET STYLES */
-              img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-              table { border-collapse: collapse !important; }
-              body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
-          </style>
-        </head>
-        <body style="background-color:#00897B; margin: 0 !important; padding: 60px 0 60px 0 !important;">
-          <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
-            <tr>
-                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
-                <td bgcolor="white" width="600" style="border-radius: 4px; color: grey; font-family: sans-serif; font-size: 18px; line-height: 28px; padding: 40px 40px;">
-                  <h1 style="color: black; font-size: 32px; font-weight: bold; line-height: 36px; margin: 0 0 30px 0;">Hi '.$username.' thank you for registering at Forum.diy.</h1>
-                  <p style="margin: 0 0 30px 0;"> <em style="color: black;"> You can activate your account at <a role="button" href='.$url.' style="border-radius: 5px; text-decoration: none; background-color: #2c3e50; color:white; padding: .4em;">THIS</a> link </em> </p>
-                </td>
-                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
-            </tr>
-          </table>
-        </body>
-      </html>
-';
          $mail->Body    = $template;
 
 
