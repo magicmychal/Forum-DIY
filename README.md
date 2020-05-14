@@ -1,15 +1,19 @@
-# Hey, before you start!
-## Read this one.
-
-Users to login:
-Moderator:
-username: peter
-password: 123456
+# Forum DIY 
 
 
 
+## Introduction
 
-## Introduction 
+This webapp was a college project for the Web Security electives. 
+The purpose was to create an app without using any frameworks and keeping in mind the top 
+10 OWASP vulnerabilities
+The Team included:
+- Peter Todorov
+- Martin
+- Bereniké Hegedűs
+- Michał Pawlicki 
+
+## Note 
 Here is a quick explanation of what 
 tis small MVC app does and how to start using it. 
 
